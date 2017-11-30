@@ -12,6 +12,7 @@ SCREENWIDTH  = 288
 SCREENHEIGHT = 512
 
 pygame.init()
+aux=1
 FPSCLOCK = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
 pygame.display.set_caption('Flappy Bird')
@@ -29,9 +30,11 @@ BACKGROUND_WIDTH = IMAGES['background'].get_width()
 PLAYER_INDEX_GEN = cycle([0, 1, 2, 1])
 
 
+
 class GameState:
     def __init__(self):
         self.score = self.playerIndex = self.loopIter = 0
+        self.aux = 1
         self.playerx = int(SCREENWIDTH * 0.2)
         self.playery = int((SCREENHEIGHT - PLAYER_HEIGHT) / 2)
         self.basex = 0
@@ -138,6 +141,16 @@ class GameState:
         SCREEN.blit(IMAGES['player'][self.playerIndex],
                     (self.playerx, self.playery))
 
+        #timer
+        gamefont=pygame.font.Font(None, 30)
+        timer = pygame.time.get_ticks()/1000
+        if aux == timer :
+            timer == timer
+            print timer
+
+        timertext = gamefont.render('timer : ' +str(timer), 0 , (255,255, 255))
+        SCREEN.blit(timertext,(0,0))
+        
         image_data = pygame.surfarray.array3d(pygame.display.get_surface())
         pygame.display.update()
         FPSCLOCK.tick(FPS)
@@ -164,7 +177,7 @@ def showScore(score):
     """displays score in center of screen"""
     scoreDigits = [int(x) for x in list(str(score))]
     totalWidth = 0 # total width of all numbers to be printed
-
+   
     for digit in scoreDigits:
         totalWidth += IMAGES['numbers'][digit].get_width()
 
@@ -173,7 +186,6 @@ def showScore(score):
     for digit in scoreDigits:
         SCREEN.blit(IMAGES['numbers'][digit], (Xoffset, SCREENHEIGHT * 0.1))
         Xoffset += IMAGES['numbers'][digit].get_width()
-
 
 def checkCrash(player, upperPipes, lowerPipes):
     """returns True if player collders with base or pipes."""
