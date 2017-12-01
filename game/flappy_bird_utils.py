@@ -1,25 +1,24 @@
+#!/usr/bin/python
+# -*- coding: 949 -*-
 import pygame
 import sys
-
-#ìºë¦­í„°, ì†Œë¦¬, ìŠ¤ì½”ì–´, íŒŒì´í”„ë¥¼ load
 def load():
-    
-    # ë‚ ê°œ ìœ„ì¹˜ê°€ ì¡°ê¸ˆì”© ë‹¤ë¥¸ ì‚¬ì§„ë“¤ì˜ ê²½ë¡œ 
+    # ³¯°³ À§Ä¡°¡ Á¶±İ¾¿ ´Ù¸¥ »çÁøµéÀÇ °æ·Î 
     PLAYER_PATH = (
             'assets/sprites/redbird-upflap.png',
             'assets/sprites/redbird-midflap.png',
             'assets/sprites/redbird-downflap.png'
     )
 
-    # ë°°ê²½ì˜ ê²½ë¡œ
+    # ¹è°æÀÇ °æ·Î
     BACKGROUND_PATH = 'assets/sprites/background-black.png'
 
-    # íŒŒì´í”„ ì‚¬ì§„ì˜ ê²½ë¡œ 
+    # ÆÄÀÌÇÁ »çÁøÀÇ °æ·Î 
     PIPE_PATH = 'assets/sprites/pipe-green.png'
 
     IMAGES, SOUNDS, HITMASKS = {}, {}, {}
 
-    # ì ìˆ˜ë¥¼ ë³´ì—¬ì£¼ê¸° ìœ„í•´ íˆ¬ëª…ë„ ì˜¬ë ¤ì„œ ì ìˆ˜ë¥¼ ì‚¬ì§„ì„ ì €ì¥  
+    # Á¡¼ö¸¦ º¸¿©ÁÖ±â À§ÇØ Åõ¸íµµ ¿Ã·Á¼­ Á¡¼ö¸¦ »çÁøÀ» ÀúÀå  
     IMAGES['numbers'] = (
         pygame.image.load('assets/sprites/0.png').convert_alpha(),
         pygame.image.load('assets/sprites/1.png').convert_alpha(),
@@ -33,45 +32,45 @@ def load():
         pygame.image.load('assets/sprites/9.png').convert_alpha()
     )
 
-    # ë°”ë‹¥ì˜ ë°°ê²½ íˆ¬ëª…ë„ë¥¼ ì˜¬ë ¤ì„œ load
+    # ¹Ù´ÚÀÇ ¹è°æ Åõ¸íµµ¸¦ ¿Ã·Á¼­ load
     IMAGES['base'] = pygame.image.load('assets/sprites/base.png').convert_alpha()
 
-    # ì†Œë¦¬ 
+    # ¼Ò¸® 
     if 'win' in sys.platform:
         soundExt = '.wav'
     else:
         soundExt = '.ogg'
 
-    SOUNDS['die']    = pygame.mixer.Sound('assets/audio/die' + soundExt) #ì£½ì—ˆì„ ë•Œ ì†Œë¦¬
-    SOUNDS['hit']    = pygame.mixer.Sound('assets/audio/hit' + soundExt)    #ë§ì•˜ì„ ë•Œ 
-    SOUNDS['point']  = pygame.mixer.Sound('assets/audio/point' + soundExt)  #
-    SOUNDS['swoosh'] = pygame.mixer.Sound('assets/audio/swoosh' + soundExt)ê°œ #íœ™ í•˜ëŠ” ì†Œ
-    SOUNDS['wing']   = pygame.mixer.Sound('assets/audio/wing' + soundExt) #ë‚ ê°œ 
+    SOUNDS['die']    = pygame.mixer.Sound('assets/audio/die' + soundExt) # Á×¾úÀ» ¶§ ¼Ò¸®
+    SOUNDS['hit']    = pygame.mixer.Sound('assets/audio/hit' + soundExt)    # ¸Â¾ÒÀ» ¶§ 
+    SOUNDS['point']  = pygame.mixer.Sound('assets/audio/point' + soundExt)  # ¶Û ¶§ ³ª´Â ¼Ò¸® 
+    SOUNDS['swoosh'] = pygame.mixer.Sound('assets/audio/swoosh' + soundExt) # È× ÇÏ´Â ¼Ò¸® 
+    SOUNDS['wing']   = pygame.mixer.Sound('assets/audio/wing' + soundExt) # ³¯°³ 
 
-    # ë°°ê²½ load
+    # ¹è°æ load
     IMAGES['background'] = pygame.image.load(BACKGROUND_PATH).convert()
 
-    # ë‚ ê°œë¥¼ ì›€ì§ì´ëŠ” ëª¨ì–‘ì„ í•˜ê¸° ìœ„í•´ ë‚ ê°œ ëª¨ì–‘ì´ ë‹¤ë¥¸ ì‚¬ì§„ì„ íˆ¬ëª…ë„ë¥¼ ì˜¬ë ¤ì„œ ì €ì¥, ì—¬ê¸°ì„œ ì„ íƒ  
+    # ³¯°³¸¦ ¿òÁ÷ÀÌ´Â ¸ğ¾çÀ» ÇÏ±â À§ÇØ ³¯°³ ¸ğ¾çÀÌ ´Ù¸¥ »çÁøÀ» Åõ¸íµµ¸¦ ¿Ã·Á¼­ ÀúÀå, ¿©±â¼­ ¼±ÅÃ  
     IMAGES['player'] = (
         pygame.image.load(PLAYER_PATH[0]).convert_alpha(),
         pygame.image.load(PLAYER_PATH[1]).convert_alpha(),
         pygame.image.load(PLAYER_PATH[2]).convert_alpha(),
     )
 
-    # ê±°ê¾¸ë¡œ ë¶™ì€ íŒŒì´í”„ì™€ ì¼ë°˜ íŒŒì´í”„ë¥¼ ì„ íƒ 
+    # °Å²Ù·Î ºÙÀº ÆÄÀÌÇÁ¿Í ÀÏ¹İ ÆÄÀÌÇÁ¸¦ ¼±ÅÃ 
     IMAGES['pipe'] = (
         pygame.transform.rotate(
             pygame.image.load(PIPE_PATH).convert_alpha(), 180),  
         pygame.image.load(PIPE_PATH).convert_alpha(),
     )
 
-    # íŒŒì´í”„ì˜ hitmask
+    # ÆÄÀÌÇÁÀÇ hitmask
     HITMASKS['pipe'] = (
         getHitmask(IMAGES['pipe'][0]),
         getHitmask(IMAGES['pipe'][1]),
     )
 
-    # í”Œë ˆì´ì–´(ìƒˆ)ì˜ hitmask
+    # ÇÃ·¹ÀÌ¾î(»õ)ÀÇ hitmask
     HITMASKS['player'] = (
         getHitmask(IMAGES['player'][0]),
         getHitmask(IMAGES['player'][1]),
@@ -80,15 +79,16 @@ def load():
 
     return IMAGES, SOUNDS, HITMASKS
 
-#íŒŒì´í”„ì™€ í”Œë ˆì´ì–´(ìƒˆ)ê°€ ì–´ë””ìˆëŠ”ì§€ ì•Œê¸° ìœ„í•˜ì—¬ ë§Œë“  í•¨ìˆ˜ 
+
 def getHitmask(image):
+    # ÆÄÀÌÇÁ¿Í ÇÃ·¹ÀÌ¾î(»õ)°¡ ¾îµğÀÖ´ÂÁö ¾Ë±â À§ÇÏ¿© ¸¸µç ÇÔ¼ö 
     """returns a hitmask using an image's alpha."""
     mask = [] 
-    #ì´ë¯¸ì§€ì˜ ë„“ì´ë§Œí¼ ê³„ì†í•œë‹¤
-    for x in range(image.get_width()): . 
-        mask.append([]) #maskì˜ ë¦¬ìŠ¤íŠ¸ ì¦ê°€
-        #ì´ë¯¸ì§€ì˜ ë†’ì´ë§Œí¼ ê³„ì†í•œë‹¤.
+    # ÀÌ¹ÌÁöÀÇ ³ĞÀÌ¸¸Å­ °è¼ÓÇÑ´Ù
+    for x in range(image.get_width()):  
+        mask.append([]) # maskÀÇ ¸®½ºÆ® Áõ°¡
+        # ÀÌ¹ÌÁöÀÇ ³ôÀÌ¸¸Å­ °è¼ÓÇÑ´Ù.
         for y in range(image.get_height()): 
             mask[x].append(bool(image.get_at((x,y))[3]))
-            #ë‹¨ì¼ í”½ì…€ì—ì„œ ìƒ‰ìƒê°’ì„ ê°€ì ¸ì˜¤ëŠ” ê²ƒì¸ë° ì´ê²ƒì´ ìˆë‹¤ë©´ true ì¶”ê°€ 
+            # ´ÜÀÏ ÇÈ¼¿¿¡¼­ »ö»ó°ªÀ» °¡Á®¿À´Â °ÍÀÎµ¥ ÀÌ°ÍÀÌ ÀÖ´Ù¸é true Ãß°¡ 
     return mask

@@ -12,7 +12,7 @@ SCREENWIDTH  = 288
 SCREENHEIGHT = 512
 
 pygame.init()
-aux=1
+aux=0
 FPSCLOCK = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
 pygame.display.set_caption('Flappy Bird')
@@ -34,7 +34,7 @@ PLAYER_INDEX_GEN = cycle([0, 1, 2, 1])
 class GameState:
     def __init__(self):
         self.score = self.playerIndex = self.loopIter = 0
-        self.aux = 1
+        self.aux = 0
         self.playerx = int(SCREENWIDTH * 0.2)
         self.playery = int((SCREENHEIGHT - PLAYER_HEIGHT) / 2)
         self.basex = 0
@@ -148,7 +148,7 @@ class GameState:
             timer == timer
             print timer
 
-        timertext = gamefont.render('timer : ' +str(timer), 0 , (255,255, 255))
+        timertext = gamefont.render('timer : ' +str(timer), 1 , (255,255, 255))
         SCREEN.blit(timertext,(0,0))
         
         image_data = pygame.surfarray.array3d(pygame.display.get_surface())
